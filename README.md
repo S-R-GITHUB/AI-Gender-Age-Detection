@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI Gender and Age Detection Web App
 
 A Flask + OpenCV based AI web application that detects:
@@ -47,3 +48,6 @@ Open browser:
 ```text
 http://127.0.0.1:5000
 ```
+=======
+# AI-Gender-Age-Detection
+>>>>>>> b2ec86e4f046ea46538138cf31731b558297eea5
