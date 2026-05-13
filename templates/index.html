@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Gender & Age Detection</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Particles JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #020617;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Animated Background */
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Main Card */
+
+        .main-box {
+
+            background: rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            margin-top: 60px;
+
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 42px;
+        }
+
+        /* Buttons */
+
+        .btn-custom {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        /* Upload Box */
+
+        .upload-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        /* Drag Drop Area */
+
+        .upload-area {
+
+            border: 2px dashed #38bdf8;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            display: block;
+        }
+
+        .upload-area:hover {
+
+            background: rgba(255, 255, 255, 0.05);
+
+            transform: scale(1.02);
+        }
+
+        footer {
+
+            margin-top: 60px;
+
+            padding: 30px;
+
+            background: #0f172a;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+        .social-btn {
+            margin: 5px;
+            border-radius: 10px;
+        }
+
+        .card {
+
+            border: none;
+
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.08) !important;
+
+            backdrop-filter: blur(10px);
+
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+
+            transform: translateY(-5px);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div id="particles-js"></div>
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7 col-md-9">
+
+                <div class="main-box text-center">
+
+                    <h1>
+                        AI Gender & Age Detection
+                    </h1>
+
+                    <p class="mt-3 text-light">
+                        Deep Learning Powered Detection System
+                    </p>
+
+                    <br>
+
+                    <!-- Upload Section -->
+
+                    <div class="upload-box">
+
+                        <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+
+                            <label for="file-upload" class="upload-area">
+
+                                <div>
+
+                                    <h4>
+                                        Drag & Drop Image Here
+                                    </h4>
+
+                                    <p>
+                                        or Click to Upload
+                                    </p>
+
+                                    <p id="file-name" class="mt-3 text-info">
+
+                                    </p>
+
+                                </div>
+
+                            </label>
+
+                            <input id="file-upload" type="file" name="image" hidden required>
+
+                            <br>
+
+                            <button type="submit" class="btn btn-primary btn-custom">
+                                Upload & Detect
+                            </button>
+
+                        </form>
+
+                        <!-- Loading Spinner -->
+
+                        <div id="loader" style="display:none;">
+
+                            <br>
+
+                            <div class="spinner-border text-info" role="status">
+
+                            </div>
+
+                            <br><br>
+
+                            <h5>
+                                AI is processing image...
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <!-- AI Dashboard -->
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-4">
+
+                            <div class="card bg-dark text-light p-3">
+
+                                <h3>
+                                    AI Model
+                                </h3>
+
+                                <p>
+                                    OpenCV DNN
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="card bg-dark text-light p-3">
+
+                                <h3>
+                                    Detection
+                                </h3>
+
+                                <p>
+                                    Gender + Age
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="card bg-dark text-light p-3">
+
+                                <h3>
+                                    Accuracy
+                                </h3>
+
+                                <p>
+                                    90%+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- Live Detection -->
+
+                    <a href="/live">
+
+                        <button class="btn btn-success btn-custom">
+
+                            Start Live Detection
+
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="text-center mt-5 p-4">
+
+        <hr class="text-light">
+
+        <h5 class="mb-3">
+            Developed by Shantanu Raut
+        </h5>
+
+        <p>
+            AI-Powered Gender & Age Detection Web Application
+        </p>
+
+        <div class="mt-3">
+
+            <a href="https://shantanuraut.com" target="_blank" class="btn btn-outline-info social-btn">
+                Portfolio
+            </a>
+
+            <a href="mailto:rautshantanu2004@gmail.com" class="btn btn-outline-light social-btn">
+                Email
+            </a>
+
+            <a href="https://github.com/S-R-GITHUB" target="_blank" class="btn btn-outline-success social-btn">
+                GitHub
+            </a>
+
+            <a href="https://www.linkedin.com/in/shantanu-raut-713b93261/" target="_blank"
+                class="btn btn-outline-primary social-btn">
+                LinkedIn
+            </a>
+
+        </div>
+
+        <br>
+
+        <p class="text-secondary">
+            Built using Python, Flask, OpenCV & Deep Learning
+        </p>
+
+        <p class="text-secondary">
+            © 2026 Shantanu Raut. All Rights Reserved.
+        </p>
+
+    </footer>
+
+    <!-- Scripts -->
+
+    <script>
+
+        function showLoader() {
+
+            document.getElementById("loader").style.display = "block";
+
+        }
+
+        const uploadArea = document.querySelector(".upload-area");
+
+        const fileInput = document.getElementById("file-upload");
+
+
+        // Prevent browser default behavior
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+
+        });
+
+
+        function preventDefaults(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+        }
+
+
+        // Highlight area on drag
+
+        ["dragenter", "dragover"].forEach(eventName => {
+
+            uploadArea.addEventListener(eventName, () => {
+
+                uploadArea.style.background = "rgba(255,255,255,0.08)";
+
+            });
+
+        });
+
+
+        // Remove highlight
+
+        ["dragleave", "drop"].forEach(eventName => {
+
+            uploadArea.addEventListener(eventName, () => {
+
+                uploadArea.style.background = "";
+
+            });
+
+        });
+
+
+        // Handle dropped files
+
+        uploadArea.addEventListener("drop", (e) => {
+
+            const dt = e.dataTransfer;
+
+            const files = dt.files;
+
+            fileInput.files = files;
+
+            document.getElementById("file-name").innerText =
+                files[0].name;
+
+        });
+
+
+        // Handle click upload
+
+        fileInput.addEventListener("change", () => {
+
+            if (fileInput.files.length > 0) {
+
+                document.getElementById("file-name").innerText =
+                    fileInput.files[0].name;
+
+            }
+
+        });
+
+
+        // Particles Animation
+
+        particlesJS("particles-js", {
+
+            "particles": {
+
+                "number": {
+                    "value": 80
+                },
+
+                "size": {
+                    "value": 3
+                },
+
+                "move": {
+                    "speed": 2
+                },
+
+                "line_linked": {
+                    "enable": true
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
